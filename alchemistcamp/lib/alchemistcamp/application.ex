@@ -20,13 +20,13 @@ defmodule Alchemistcamp.Application do
   end
 
   def start_webserver() do
-    root_path = {"/", :cowboy_static, {:priv_file, :alchemistcamp, "static/index.html"}}
-    static_route = {"/static/[...]", :cowboy_static, {:priv_dir, :alchemistcamp, "static"}}
-    main_route = {:_, Alchemistcamp.Web.PageHandler, Alchemistcamp.Web.Router}
+    routes = [
+      {"/", :cowboy_static, {:priv_file, :alchemistcamp, "static/index.html"}},
+      {"/static/[...]", :cowboy_static, {:priv_dir, :alchemistcamp, "static"}},
+      {:_, Alchemistcamp.Web.PageHandler, Alchemistcamp.Web.Router}
+    ]
 
-    dispatch = :cowboy_router.compile([{:_,
-      [root_path, static_route, main_route]
-    }])
+    dispatch = :cowboy_router.compile([{:_, routes}])
 
     opts = [port: 8080]
     env = [dispatch: dispatch]

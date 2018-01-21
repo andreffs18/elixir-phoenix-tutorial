@@ -10,11 +10,7 @@ defmodule Alchemistcamp.Web.PageHandler do
     conn = %Glue.Conn{req_path: path}
     conn = router.call(conn)
 
-    {:ok, resp} = :cowboy_req.reply(
-      conn.status,
-      conn.resp_header,
-      conn.resp_body,
-      req)
+    {:ok, resp} = :cowboy_req.reply(conn.status, conn.resp_header, conn.resp_body, req)
     {:ok, resp, router}
   end
 
