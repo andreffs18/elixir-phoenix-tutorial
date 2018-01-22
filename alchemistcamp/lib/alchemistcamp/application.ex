@@ -6,7 +6,6 @@ defmodule Alchemistcamp.Application do
   use Application
 
   def start(_type, _args) do
-
     start_webserver()
 
     # List all child processes to be supervised
@@ -23,7 +22,7 @@ defmodule Alchemistcamp.Application do
     routes = [
       {"/", :cowboy_static, {:priv_file, :alchemistcamp, "static/index.html"}},
       {"/static/[...]", :cowboy_static, {:priv_dir, :alchemistcamp, "static"}},
-      {:_, Alchemistcamp.Web.PageHandler, Alchemistcamp.Web.Router}
+      {:_, Owl.PageHandler, Alchemistcamp.Web.Router}
     ]
 
     dispatch = :cowboy_router.compile([{:_, routes}])

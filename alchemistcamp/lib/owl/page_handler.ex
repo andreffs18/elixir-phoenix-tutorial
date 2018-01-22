@@ -1,4 +1,4 @@
-defmodule Alchemistcamp.Web.PageHandler do
+defmodule Owl.PageHandler do
 
   def init({:tcp, :http}, req, router) do
     {:ok, req, router}
