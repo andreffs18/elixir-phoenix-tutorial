@@ -22,7 +22,8 @@ defmodule Alchemistcamp.Application do
   def start_webserver() do
     routes = [
       {"/", :cowboy_static, {:priv_file, :alchemistcamp, "static/index.html"}},
-      {"/static/[...]", :cowboy_static, {:priv_dir, :alchemistcamp, "static"}},
+      {"/images/[...]", :cowboy_static, {:priv_dir, :alchemistcamp, "static/images"}},
+      {"/stats/[...]", :cowboy_static, {:priv_dir, :alchemistcamp, "static/stats"}},
       {:_, Owl.PageHandler, Alchemistcamp.Web.Router}
     ]
 

@@ -17,7 +17,7 @@ defmodule StatWatch do
   end
 
   def save_csv(row, name \\ ["stats"]) do
-    filename = "#{name}.csv"
+    filename = "priv/static/stats/#{name}.csv"
     unless File.exists? filename do
       File.write!(filename, column_names() <> "\n")
     end
