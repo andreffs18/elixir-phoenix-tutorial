@@ -7,6 +7,7 @@ defmodule Alchemistcamp.Application do
 
   def start(_type, _args) do
     start_webserver()
+    start_database_link()
 
     # List all child processes to be supervised
     children = [
@@ -34,6 +35,10 @@ defmodule Alchemistcamp.Application do
       {:ok, _pid} -> IO.puts("Cowboy is now running. Go to http://localhost:8080.")
       _ -> IO.puts("There was an error starting Cowboy webserver.")
     end
+  end
+
+  def start_database_link() do
+    StatWatch.Repo.start_link()
   end
 
 end

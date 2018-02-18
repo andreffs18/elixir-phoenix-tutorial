@@ -24,7 +24,8 @@ defmodule StatWatch.Mixfile do
     [
       {:poison, "~> 3.1"},
       {:httpoison, "~> 0.13"},
-      #
+      {:postgrex, ">= 0.0.0"},
+      {:ecto, "~> 2.2"}
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"},
     ]
   end

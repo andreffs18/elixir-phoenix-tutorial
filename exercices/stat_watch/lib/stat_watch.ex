@@ -11,14 +11,13 @@ defmodule StatWatch do
 
   def fetch_data do
     now = DateTime.to_string(%{DateTime.utc_now | microsecond: {0, 0}})
-
     %{body: body} = HTTPoison.get! stats_url()
-    [ %{"id": this_id} = row | _ ] = Poison.decode! body, keys: :atoms
-    [ now, this_id] |> Enum.join(", ")
+    data = Poison.decode! body, keys: :atoms
+    Enum.join [now, data[:BTC], data[:EUR], data[:USD]], ","
   end
 
-  def save_csv(row) do
-    filename = "stats.csv"
+  def save_csv(row, name \\ ["stats"]) do
+    filename = "#{name}.csv"
     unless File.exists? filename do
       File.write!(filename, column_names() <> "\n")
     end
@@ -27,6 +26,6 @@ defmodule StatWatch do
   end
 
   def column_names() do
-    Enum.join ~w(Datetime Subscribers Videos Views), ","
+    Enum.join ~w(DATE BTC EUR USD), ","
   end
 end

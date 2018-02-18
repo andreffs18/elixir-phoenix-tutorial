@@ -5,7 +5,7 @@ defmodule StatWatch.Application do
     import Supervisor.Spec, warn: false
 
     children = [
-      # worker(StatWatch.Scheduler, [])
+      worker(StatWatch.Scheduler, [])
     ]
 
     opts = [strategy: :one_for_one, name: StatWatch.Supervisor]
